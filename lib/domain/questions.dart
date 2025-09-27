@@ -15,6 +15,16 @@ class Question extends Equatable {
     required this.personagem
   });
 
+  //Esse metodo e necessario para poder acessar as o Json pelo menos pelo que ele ta me mostrando aqui
+  factory Question.fromJson(Map<String, dynamic> json){
+    return Question(
+                    pergunta:json["pergunta"],
+                    perguntaTraduzida:json["traducao"],
+                    respostaCorreta:json["resposta"],
+                    personagem : Personagem.vazio()
+                  );
+  }
+
   @override
   List<Object?> get props => [pergunta, perguntaTraduzida, respostaCorreta];
 }

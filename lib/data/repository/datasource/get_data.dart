@@ -1,23 +1,17 @@
-import 'domain/personagem.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'domain/questions.dart';
 import 'dart:convert';
 //Não sei se esta correto essa parte de import 
 
 class GetDado {
-	final String pergunta;
-    final String resposta;
-    final String traducao;
 
-    factory GetDado.fromJson(Map<String, dynamic> json){
-        return New Questions()
-    }
-
- 	Future<List<Questions>> carregandoPerguntas() {
+ 	Future<List<Questions>> carregandoPerguntas() async{
         //aqui eu leio o arquivo
 		String load = await rootBundle.loadString('asset/json/perguntas.json');
 		//aqui eu decodifico ele
-        final List<dynamic> dados =json.decode(load);
+        final Map<String,dynamic> dados =json.decode(load);
+        final List<dynamic> lista = dados["perguntas"];
         //e aqui passo os dados pra Questions
-        return dados.map((e)=>GetDado.fromJson(e)).toList();
+        return lista.map((e)=>GetDado.fromJson(e)).toList();
     }
 }
